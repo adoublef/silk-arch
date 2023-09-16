@@ -1,6 +1,5 @@
 import './App.css';
-import { Text } from "./components/text";
-import { RenderContent } from "./lib/render_content";
+import Registry, { RenderContent } from "./lib/render_content";
 
 type Block = {
     id: string;
@@ -13,12 +12,14 @@ type Content = {
     blocks: Block[];
 };
 
+const id = () => crypto.randomUUID();
+
 function App() {
     const content: Content = {
         blocks: [
             // block
             {
-                id: crypto.randomUUID(),
+                id: id(),
                 component: "Text",
                 props: {
                     text: "Foo"
@@ -26,12 +27,27 @@ function App() {
                 children: []
             },
             {
-                id: crypto.randomUUID(),
+                id: id(),
                 component: "Text",
                 props: {
                     text: "Baz"
                 },
                 children: []
+            },
+            {
+                id: id(),
+                component: "Text",
+                props: {},
+                children: [
+                    // {
+                    //     id: id(),
+                    //     component: "Text",
+                    //     props: {
+                    //         text: "Baz"
+                    //     },
+                    //     children: []
+                    // }
+                ]
             },
         ]
     };
@@ -39,7 +55,7 @@ function App() {
 
     return (
         <>
-            <Text text="Bar" />
+            {/* <Text text="Bar" /> */}
             <RenderContent content={content} />
         </>
     );

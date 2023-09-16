@@ -11,7 +11,6 @@ type Content = {
     blocks: Block[];
 };
 
-
 export function RenderContent({ content }: { content: Content; }) {
     return (
         <>

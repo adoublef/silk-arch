@@ -1,4 +1,4 @@
-import { componentRegistry } from "./component_registry";
+import Registry from "./component_registry";
 
 type Block = {
     id: string;
@@ -8,7 +8,11 @@ type Block = {
 };
 
 export function RenderBlock({ block }: { block: Block; }) {
-    const Component = componentRegistry.get(block.component)!;
+    const Component = Registry.get(block.component);
+    if (!Component) return (
+        <></>
+    );
+
     return (
         <Component {...block.props}>
             {block.children.map((block) => (
